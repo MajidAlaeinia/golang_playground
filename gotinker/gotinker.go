@@ -1,18 +1,68 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
+
+type Shape interface {
+	area() float64
+}
+
+type Circle struct {
+	Radius float64
+}
+
+type Rectangle struct {
+	Width, Height float64
+}
+
+func (c Circle) area() float64 {
+	return c.Radius * c.Radius * math.Pi
+}
+
+func (r Rectangle) area() float64 {
+	return r.Width * r.Height
+}
+
+func getArea(sh Shape) float64 {
+	return sh.area()
+}
+
+type Animal interface {
+	seda() string
+}
+
+type Cat struct {
+	Name string
+}
+
+type Dog struct {
+	Name string
+}
+
+func (c Cat) seda() string {
+	return "Meow"
+}
+
+func (d Dog) seda() string {
+	return "Hop"
+}
+
+func getSeda(a Animal) string {
+	return a.seda()
+}
 
 func main() {
-	var a int = 20 /* actual variable declaration */
-	var ip *int    /* pointer variable declaration */
+	c := Cat{"Sirus"}
+	d := Dog{"Virus"}
 
-	ip = &a /* store address of a in pointer variable*/
+	fmt.Println(getSeda(c))
+	fmt.Println(getSeda(d))
 
-	fmt.Printf("Address of a variable: %x\n", &a)
+	ci := Circle{5}
+	re := Rectangle{5, 4}
 
-	/* address stored in pointer variable */
-	fmt.Printf("Address stored in ip variable: %x\n", ip)
-
-	/* access the value using the pointer */
-	fmt.Printf("Value of *ip variable: %d\n", *ip)
+	fmt.Println(getArea(ci))
+	fmt.Println(getArea(re))
 }
