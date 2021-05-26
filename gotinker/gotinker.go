@@ -1,24 +1,25 @@
 package main
 
 import (
-	"fmt"
-	"math/rand"
-	"time"
+	"log"
 )
 
 func main() {
-	//aa := strings.Join(strings.Fields(strings.TrimSpace("Hello    World")), " ")
-	aa := RandomStringWithLength(10)
-	fmt.Println(aa)
+
+	items := []string{"A", "1", "B", "2", "C", "3"}
+
+	// Missing Example
+	found := IsStringInSlice(items, "A")
+	log.Println(found, "\n")
 }
 
-var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-
-func RandomStringWithLength(ln int) string {
-	rand.Seed(time.Now().UnixNano())
-	b := make([]rune, ln)
-	for i := range b {
-		b[i] = letters[rand.Intn(len(letters))]
+// IsStringInSlice takes a slice and looks for an element in it. If found it will
+// return it's key, otherwise it will return -1 and a bool of false.
+func IsStringInSlice(slice []string, val string) bool {
+	for _, item := range slice {
+		if item == val {
+			return true
+		}
 	}
-	return string(b)
+	return false
 }
